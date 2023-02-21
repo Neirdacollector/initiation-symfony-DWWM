@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les Produits{% endblock %}
+
+{% block content %}
+
+
+    <div class="row">
+    <div class="col-md-3">
+    <h3>Filter</h3>
+    {{ form(form) }}
+    </div>
+    <div class="col-md-9">
+    <h3>Les produits</h3>
+    <div class="row">
+    
+{% for product in products %}
+
+            <div class="col-md-4">
+                <div class="product-item text-center">
+                    <figure>
+                        <a href="{{ path('product', { 'slug' : product.slug }) }}">
+                            <img src="/uploads/{{ product.picture }}" alt="{{ product.name }}" class="img-fluid">
+                        </a>
+                    </figure>
+                    <h5>{{ product.name }}</h5>
+                    <p>{{ product.subtitle }}</p>
+                    <p class="product-price">{{ (product.price/100)|number_format(2,",",".") }} €</p> {#  "|number_format(2,",",".")" est un filtre twig qui permet de dire qu'on veut deux décimales après la virgule, séparé par une virgule et les milliers séparé par un point  #}
+                </div>
+            </div>
+
+        {% endfor %}
+    </div>
+    </div>
+        
+    </div>
+{% endblock %}
